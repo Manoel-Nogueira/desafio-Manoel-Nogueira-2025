@@ -145,7 +145,7 @@ class AbrigoAnimais {
 
       })
 
-      resultado = resultado.concat(resultadoPess1, resultadoPess2, resultadoSobra);
+      resultado = resultado.concat(tratarLoco(resultadoPess1), tratarLoco(resultadoPess2), resultadoSobra);
       return resultado;
 
     } 
@@ -156,6 +156,70 @@ class AbrigoAnimais {
       return adotados.length === 1 && adotados[0].startsWith("Loco") ? [] : adotados;
 
     }
+
+    // Main/Controle das funções
+
+    const brinquedos = [
+      "RATO", 
+      "BOLA", 
+      "LASER", 
+      "CAIXA", 
+      "NOVELO", 
+      "SKATE", 
+      "RATO"
+    ]
+
+    const animais = [
+      "Rex",
+      "Mimi",
+      "Fofo",
+      "Zero",
+      "Bola",
+      "Bebe",
+      "Loco"
+    ]
+
+    const animaisBrinque = [
+      ["Rex", "cão", ["RATO", "BOLA"]],
+      ["Fofo", "gato", ["BOLA", "RATO","LASER"]],
+      ["Mimi", "gato", ["BOLA", "LASER"]],
+      ["Zero", "gato", ["RATO", "BOLA"]],
+      ["Bola", "cão", ["CAIXA", "NOVELO"]],
+      ["Bebe", "cão", ["LASER", "RATO", "BOLA"]],
+      ["Loco", "jabuti", ["SKATE", "RATO"]]
+    ]
+
+    let brinquedosPess1 = brinquedosPessoa1.split(",");
+    let brinquedosPess2 = brinquedosPessoa2.split(",");
+    let ordemAnima = ordemAnimais.split(",");
+
+    if (validarDados(ordemAnima, animais)) {
+
+      return {
+
+        erro: "Animal inválido"
+
+      };
+
+    }
+
+    if (validarDados(brinquedosPess1, brinquedos) || validarDados(brinquedosPess2, brinquedos)) {
+
+      return {
+
+        erro: "Brinquedo inválido"
+
+      };
+
+    }
+
+    let resultado = distAnimais(brinquedosPess1, brinquedosPess2, animaisBrinque);
+
+    return {
+
+      lista: resultado.toSorted()
+
+    };
 
   }
 
