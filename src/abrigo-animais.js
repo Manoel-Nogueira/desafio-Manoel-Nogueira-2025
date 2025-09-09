@@ -150,6 +150,13 @@ class AbrigoAnimais {
 
     } 
 
+    // Função para tratar o caso do Loco (Loco tem que ter outro animal como companhia)
+    function tratarLoco(adotados) {
+
+      return adotados.length === 1 && adotados[0].startsWith("Loco") ? [] : adotados;
+
+    }
+
   }
 
 }
