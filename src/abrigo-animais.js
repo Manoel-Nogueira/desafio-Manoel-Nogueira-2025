@@ -102,7 +102,7 @@ class AbrigoAnimais {
 
           resultado.push(anima + " - abrigo")
 
-        } else if (pessoa1Adota && pessoa1QuantiAdota <= 3) {
+        } else if (pessoa1Adota && pessoa1QuantiAdota < 3) {
 
           let animal = animaisBrinque.find(ani => ani[0] === anima);
 
@@ -115,11 +115,12 @@ class AbrigoAnimais {
           } else {
 
             resultadoPess1.push(anima + " - abrigo");
-            pessoa1Gato = true;
-
+            
           } 
 
-        } else if (pessoa2Adota && pessoa2QuantiAdota <= 3) {
+          pessoa1Gato = animal[1] === "gato";
+
+        } else if (pessoa2Adota && pessoa2QuantiAdota < 3) {
           
           let animal = animaisBrinque.find(ani => ani[0] === anima);
 
@@ -132,10 +133,10 @@ class AbrigoAnimais {
           } else {
 
             resultadoPess2.push(anima + " - abrigo");
-            pessoa2Gato = true
 
           }
 
+          pessoa2Gato = animal[1] === "gato";
 
         } else {
 
@@ -153,7 +154,7 @@ class AbrigoAnimais {
     // Função para tratar o caso do Loco (Loco tem que ter outro animal como companhia)
     function tratarLoco(adotados) {
 
-      return adotados.length === 1 && adotados[0].startsWith("Loco") ? [] : adotados;
+      return adotados.length === 1 && adotados[0].startsWith("Loco") ? ["Loco - abrigo"] : adotados;
 
     }
 
@@ -213,7 +214,7 @@ class AbrigoAnimais {
 
     }
 
-    let resultado = distAnimais(brinquedosPess1, brinquedosPess2, animaisBrinque);
+    let resultado = distAnimais(brinquedosPess1, brinquedosPess2, ordemAnima, animaisBrinque);
 
     return {
 
